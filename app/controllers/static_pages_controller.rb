@@ -1,8 +1,9 @@
+require 'statsd'
+
 class StaticPagesController < ApplicationController
-  statsd = Statsd.new
 
   def home
-    statsd.increment('web.page_views')
+    increment
   end
 
   def help
@@ -13,4 +14,12 @@ class StaticPagesController < ApplicationController
 
   def contact
   end
+
+
+
+  def increment
+    statsd = Statsd.new
+    statsd.increment('web.page_views')
+  end
+
 end
